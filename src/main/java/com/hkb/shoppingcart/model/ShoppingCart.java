@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 
 @Document(collection = "ShoppingCarts")
 public class ShoppingCart {
@@ -16,7 +15,9 @@ public class ShoppingCart {
 
     public String status;
 
-    public List<Product> products;
+    public String userName;
+
+    public HashMap<String, Product> products;
 
     @JsonDeserialize(using = MongoDateConverter.class)
     public Date lastModified;
@@ -29,17 +30,19 @@ public class ShoppingCart {
 
     public ShoppingCart(){}
 
-    public ShoppingCart(String status){
+    public ShoppingCart(String status, String userName, HashMap<String, Product> products, Date orderDate, Date lastModified){
         this.status = status;
-        this.products = new ArrayList<Product>();
-    }
-
-    public ShoppingCart(String status, List<Product> products){
-        this.status = status;
+        this.userName = userName;
         this.products = products;
+        this.orderDate = orderDate;
+        this.lastModified = lastModified;
     }
 
     public String getId(){
         return this.id;
+    }
+
+    public Product getProductFromId(String productId){
+        return this.products.get(productId);
     }
 }
