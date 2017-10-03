@@ -22,6 +22,7 @@ public class ShoppingCart {
     @JsonDeserialize(using = MongoDateConverter.class)
     public Date orderDate;
 
+    //total price
     public float totalPrice = 0;
 
     public ShoppingCart(){}
