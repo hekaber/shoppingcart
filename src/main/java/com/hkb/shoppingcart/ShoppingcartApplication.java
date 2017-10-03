@@ -2,8 +2,8 @@ package com.hkb.shoppingcart;
 
 import java.util.Arrays;
 
-import com.hkb.shoppingcart.repo.UserRepository;
-import com.hkb.shoppingcart.model.User;
+import com.hkb.shoppingcart.model.CartUser;
+import com.hkb.shoppingcart.repo.CartUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +13,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class ShoppingcartApplication {
 
 	@Autowired
-	private UserRepository repo;
+	private CartUserRepository repo;
 
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartApplication.class);
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(ShoppingcartApplication.class, args);
 		logger.info("---Shopping cart application started---");
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -42,26 +48,26 @@ public class ShoppingcartApplication {
 					repo.deleteAll();
 
 					// save a couple of users
-					repo.save(new User("Alice", "Smith", "alice@gmail.com"));
-					repo.save(new User("Bob", "Smith", "bob@gmail.com"));
+					repo.save(new CartUser("Alice", "Smith", "alice", "1234", "alice@gmail.com"));
+					repo.save(new CartUser("Bob", "Smith", "bob", "1234", "bob@gmail.com"));
 
 					// fetch all users
 					System.out.println("Users found with findAll():");
 					System.out.println("-------------------------------");
-					for (User user : repo.findAll()) {
-						System.out.println(user);
+					for (CartUser cartUser : repo.findAll()) {
+						System.out.println(cartUser);
 					}
 					System.out.println();
 
 					// fetch an individual user
-					System.out.println("User found with findByFirstName('Alice'):");
+					System.out.println("CartUser found with findByFirstName('Alice'):");
 					System.out.println("--------------------------------");
 					System.out.println(repo.findByFirstName("Alice"));
 
 					System.out.println("Users found with findByLastName('Smith'):");
 					System.out.println("--------------------------------");
-					for (User user : repo.findByLastName("Smith")) {
-						System.out.println(user);
+					for (CartUser cartUser : repo.findByLastName("Smith")) {
+						System.out.println(cartUser);
 					}
 
 			};

@@ -1,12 +1,14 @@
 package com.hkb.shoppingcart.controller;
 
 import com.hkb.shoppingcart.exceptions.UserNotFoundException;
-import com.hkb.shoppingcart.model.User;
-import com.hkb.shoppingcart.repo.UserRepository;
+import com.hkb.shoppingcart.model.CartUser;
+import com.hkb.shoppingcart.repo.CartUserRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,30 +17,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UserRestController {
+public class CartUserRestController {
 
-    private final UserRepository userRepository;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserRestController.class);
+    private final CartUserRepository cartUserRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private static final Logger logger = LoggerFactory.getLogger(CartUserRestController.class);
 
     @Autowired
-    UserRestController(UserRepository userRepository){
-        this.userRepository = userRepository;
+    CartUserRestController(CartUserRepository cartUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder){
+
+        this.cartUserRepository = cartUserRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+
+    }
+
+    @PostMapping("/sign-up")
+    public void signUp(@RequestBody CartUser cartUser) {
+        cartUser.setPassword(bCryptPasswordEncoder.encode(cartUser.getPassword()));
+        cartUserRepository.save(cartUser);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    List<User> getUsers(){
+    List<CartUser> getUsers(){
         logger.debug("---Getting all users---");
-        return this.userRepository.findAll();
+        return this.cartUserRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody User input){
+    ResponseEntity<?> add(@RequestBody CartUser input){
         logger.debug("---Adding new user '" + input.lastName +" " + input.firstName +"'---");
-        User result = this.userRepository.save(
-                new User(
+        CartUser result = this.cartUserRepository.save(
+                new CartUser(
                         input.firstName,
                         input.lastName,
+                        input.getUserName(),
+                        input.getPassword(),
                         input.email
                 ));
 
@@ -49,12 +62,12 @@ public class UserRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
-    User readUser(@PathVariable String userId){
-        logger.debug("---Reading user '" + userId + "'---");
-        User user = this.userRepository.findOne(userId);
+    CartUser readUser(@PathVariable String userId){
+        logger.debug("---Reading cartUser '" + userId + "'---");
+        CartUser cartUser = this.cartUserRepository.findOne(userId);
 
-        if (user != null){
-            return user;
+        if (cartUser != null){
+            return cartUser;
         }
         else {
             throw new UserNotFoundException(userId);
@@ -63,9 +76,9 @@ public class UserRestController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
     ResponseEntity<?> delete(@PathVariable String userId){
-        if(this.userRepository.exists(userId)){
+        if(this.cartUserRepository.exists(userId)){
             logger.debug("---Deleting user '"+ userId + "'---");
-            return ResponseEntity.ok("User '" + userId + "' deleted.");
+            return ResponseEntity.ok("CartUser '" + userId + "' deleted.");
         }
         else {
             throw new UserNotFoundException(userId);
