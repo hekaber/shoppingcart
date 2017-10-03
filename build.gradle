@@ -20,12 +20,19 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
 }
 
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
+    compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
+}
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter")
 	compile("org.springframework.boot:spring-boot-starter-web:1.5.7.RELEASE")
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("io.jsonwebtoken:jjwt:0.7.0")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
