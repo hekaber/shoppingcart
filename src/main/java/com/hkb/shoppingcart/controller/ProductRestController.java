@@ -70,6 +70,7 @@ public class ProductRestController {
     ResponseEntity<?> delete(@PathVariable String productId){
         if(this.productRepository.exists(productId)){
             logger.debug("---Deleting product '" + productId +"'---");
+            this.productRepository.delete(productId);
             return ResponseEntity.ok("Product '" + productId + "' deleted.");
         }
         else {
