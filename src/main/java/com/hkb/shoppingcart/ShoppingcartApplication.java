@@ -25,11 +25,6 @@ public class ShoppingcartApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(ShoppingcartApplication.class, args);
 		logger.info("---Shopping cart application started---");
-		// ProductService productService = applicationContext.getBean(ProductService.class);
-		// productService.saveInitialBatch();
-
-		// UserService userService = applicationContext.getBean(UserService.class);
-		// userService.saveInitialBatch();
 	}
 
 	@Bean
