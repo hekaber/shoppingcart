@@ -1,6 +1,8 @@
 package com.hkb.shoppingcart.controller;
 
+import com.hkb.shoppingcart.exceptions.UserEmailExistsException;
 import com.hkb.shoppingcart.exceptions.UserNotFoundException;
+import com.hkb.shoppingcart.exceptions.UserNameExistsException;
 import com.hkb.shoppingcart.model.CartUser;
 import com.hkb.shoppingcart.repo.CartUserRepository;
 
@@ -31,10 +33,19 @@ public class CartUserRestController {
 
     }
 
-    @PostMapping("/sign-up")
-    public void signUp(@RequestBody CartUser cartUser) {
+    @PostMapping("/signup")
+    ResponseEntity<?> signUp(@RequestBody CartUser cartUser) {
         cartUser.setPassword(bCryptPasswordEncoder.encode(cartUser.getPassword()));
-        cartUserRepository.save(cartUser);
+        if(cartUserRepository.findByUserName(cartUser.getUserName()) != null){
+            throw new UserNameExistsException(cartUser.getUserName());
+        }
+        else if(cartUserRepository.findByEmail(cartUser.email) != null){
+            throw new UserEmailExistsException(cartUser.email);
+        }
+        else {
+            CartUser newUser = cartUserRepository.save(cartUser);
+            return ResponseEntity.ok("User '" + newUser.getUserName() +"' created.");
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)

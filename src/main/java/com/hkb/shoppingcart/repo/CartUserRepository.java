@@ -9,6 +9,7 @@ public interface CartUserRepository extends MongoRepository<CartUser, String> {
 
     public CartUser findByFirstName(String firstName);
     public CartUser findByUserName(String userName);
+    public CartUser findByEmail(String email);
     public List<CartUser> findByLastName(String lastName);
 
 }
