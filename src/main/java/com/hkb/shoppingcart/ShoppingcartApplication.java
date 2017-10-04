@@ -37,6 +37,7 @@ public class ShoppingcartApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 			return args -> {
 
+					BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 					System.out.println("Let's inspect the beans provided by Spring Boot:");
 
 					String[] beanNames = ctx.getBeanDefinitionNames();
@@ -48,9 +49,9 @@ public class ShoppingcartApplication {
 					repo.deleteAll();
 
 					// save a couple of users
-					repo.save(new CartUser("Alice", "Smith", "alice", "1234", "alice@gmail.com"));
-					repo.save(new CartUser("Bob", "Smith", "bob", "1234", "bob@gmail.com"));
-
+					repo.save(new CartUser("Alice", "Smith", "alice", bCryptPasswordEncoder.encode("toto"), "alice@gmail.com"));
+					repo.save(new CartUser("Bob", "Smith", "bob", bCryptPasswordEncoder.encode("toto"), "bob@gmail.com"));
+					repo.save(new CartUser("toto", "toto", "toto", bCryptPasswordEncoder.encode("toto"), "toto@gmail.com"));
 					// fetch all users
 					System.out.println("Users found with findAll():");
 					System.out.println("-------------------------------");
