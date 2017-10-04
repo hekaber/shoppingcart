@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.hkb.shoppingcart.security.SecurityConstants.EXPIRATION_TIME;
-import static com.hkb.shoppingcart.security.SecurityConstants.HEADER_STRING;
-import static com.hkb.shoppingcart.security.SecurityConstants.SECRET;
-import static com.hkb.shoppingcart.security.SecurityConstants.TOKEN_PREFIX;
+import static com.hkb.shoppingcart.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
@@ -62,6 +59,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         //Exposes the authorisation header to the client
-        res.addHeader("Access-Control-Expose-Headers", "Authorization");
+        res.addHeader(HEADER_EXPOSER, HEADER_STRING);
     }
 }
