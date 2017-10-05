@@ -75,7 +75,7 @@ public class ProductRestControllerTest {
 
         Date prodOneRelease, prodTwoRelease;
 
-        prodOneRelease = this.ft.parse("2017-01-04T15:15:55.570Z");
+        prodOneRelease = new Date(1507220850000L);
 
         this.productList.add(productRepository.save(
                 new Product(
@@ -89,7 +89,7 @@ public class ProductRestControllerTest {
 
                         )));
 
-        prodTwoRelease = this.ft.parse("2017-02-04T17:15:55.570Z");
+        prodTwoRelease = new Date(1486312050000L);
         this.productList.add(productRepository.save(
                 new Product(
                         "gilette mousse",
@@ -133,6 +133,12 @@ public class ProductRestControllerTest {
                 .contentType(contentType).content(productJson))
         .andExpect(status().isCreated());
     }
+
+//    @Test
+//    public void updateProduct() throws Exception {
+//        logger.debug("---Testing product update---");
+//        //will update the product sechoir description
+//    }
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();

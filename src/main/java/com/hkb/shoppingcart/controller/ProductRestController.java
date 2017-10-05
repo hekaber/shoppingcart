@@ -66,6 +66,22 @@ public class ProductRestController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.PUT, value = "/{productId}")
+    Product updateProduct(@RequestBody Product input, @PathVariable String productId){
+        logger.info("---Updating product '" + productId +"'---");
+        Product product = this.productRepository.findOne(productId);
+
+        if(product != null){
+
+            Product updated = this.productRepository.save(input);
+            return updated;
+        }
+        else {
+            throw new ProductNotFoundException(productId);
+        }
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/{productId}")
     ResponseEntity<?> delete(@PathVariable String productId){
         if(this.productRepository.exists(productId)){

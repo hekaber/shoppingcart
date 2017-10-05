@@ -16,7 +16,6 @@ import java.util.Date;
  * And even more explanations to follow in consecutive
  * paragraphs separated by HTML paragraph breaks.
  *
- * @param  variable Description text text text.          (3)
  * @return Description text text text.
  */
 
