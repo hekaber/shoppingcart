@@ -29,10 +29,8 @@ public class Product {
     public String productName;
     public String productCode;
 
-    @JsonDeserialize(using = MongoDateConverter.class)
     public Date releaseDate;
 
-    @JsonDeserialize(using= MongoDateConverter.class)
     public Date lastModified;
 
     public String description;
