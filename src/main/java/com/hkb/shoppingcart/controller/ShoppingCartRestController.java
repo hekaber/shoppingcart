@@ -29,8 +29,14 @@ public class ShoppingCartRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     List<ShoppingCart> getShoppingCarts(){
-        logger.debug("---Getting all products---");
+        logger.info("---Getting all products---");
         return this.shoppingCartRepository.findAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    List<ShoppingCart> getShoppingCartsByUserName(@PathVariable String userName) {
+        logger.info("---Getting all products for user '"+ userName +"'---");
+        return this.shoppingCartRepository.findByUserName(userName);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{cartId}")

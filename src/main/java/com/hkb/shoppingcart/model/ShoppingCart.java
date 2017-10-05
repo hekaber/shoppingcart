@@ -13,16 +13,14 @@ public class ShoppingCart {
     @Id
     private String id;
 
-    public String status;
+    public String status; //pending, ordered
 
     public String userName;
 
     public HashMap<String, Product> products;
 
-    @JsonDeserialize(using = MongoDateConverter.class)
     public Date lastModified;
 
-    @JsonDeserialize(using = MongoDateConverter.class)
     public Date orderDate;
 
     //total price
