@@ -59,6 +59,7 @@ public class ShoppingCartRestController {
                     input.status,
                     input.userName,
                     input.products,
+                    input.productQuantities,
                     input.orderDate,
                     input.lastModified
                 ));

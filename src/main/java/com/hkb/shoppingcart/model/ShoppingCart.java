@@ -19,10 +19,12 @@ public class ShoppingCart {
 
     public HashMap<String, Product> products;
 
-    @JsonDeserialize(using = MongoDateConverter.class)
+    public HashMap<String, Integer> productQuantities;
+
+//    @JsonDeserialize(using = MongoDateConverter.class)
     public Date lastModified;
 
-    @JsonDeserialize(using = MongoDateConverter.class)
+//    @JsonDeserialize(using = MongoDateConverter.class)
     public Date orderDate;
 
     //total price
@@ -30,10 +32,14 @@ public class ShoppingCart {
 
     public ShoppingCart(){}
 
-    public ShoppingCart(String status, String userName, HashMap<String, Product> products, Date orderDate, Date lastModified){
+    public ShoppingCart(String status, String userName,
+                        HashMap<String, Product> products,
+                        HashMap<String, Integer> productQuantities,
+                        Date orderDate, Date lastModified){
         this.status = status;
         this.userName = userName;
         this.products = products;
+        this.productQuantities = productQuantities;
         this.orderDate = orderDate;
         this.lastModified = lastModified;
     }

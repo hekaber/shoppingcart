@@ -109,13 +109,20 @@ public class ShoppingCartRestControllerTest {
         productList = productRepository.findAll();
         orderDate = this.ft.parse("2017-10-15T17:15:55.570Z");
         HashMap<String, Product> productHashMap = new HashMap<String, Product>();
-        for(Product prod : productList) productHashMap.put(prod.getId(), prod);
+        HashMap<String, Integer> productQuantities = new HashMap<String, Integer>();
+        int amount = 1;
+        for(Product prod : productList) {
+            productHashMap.put(prod.getId(), prod);
+            productQuantities.put(prod.getId(), amount);
+            amount++;
+        }
 
         this.cartList.add(shoppingCartRepository.save(
                 new ShoppingCart(
                         "pending",
                         "testuser",
                         productHashMap,
+                        productQuantities,
                         orderDate,
                         orderDate
                 )));
@@ -165,13 +172,21 @@ public class ShoppingCartRestControllerTest {
 
         List<Product> prodTest = this.productRepository.findByProductCode("GE-test");
         HashMap<String, Product> productHashMap = new HashMap<String, Product>();
-        for(Product prod : prodTest) productHashMap.put(prod.getId(), prod);
+        HashMap<String, Integer> productQuantities = new HashMap<String, Integer>();
+        int amount = 1;
+
+        for(Product prod : prodTest) {
+            productHashMap.put(prod.getId(), prod);
+            productQuantities.put(prod.getId(), amount);
+            amount++;
+        }
 
         String cartJson = this.json(
                 new ShoppingCart(
                         "pending",
                         "testuser",
                         productHashMap,
+                        productQuantities,
                         date,
                         date
                         ));
