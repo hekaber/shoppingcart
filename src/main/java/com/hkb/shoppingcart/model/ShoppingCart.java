@@ -19,8 +19,10 @@ public class ShoppingCart {
 
     public HashMap<String, Product> products;
 
+    @JsonDeserialize(using = MongoDateConverter.class)
     public Date lastModified;
 
+    @JsonDeserialize(using = MongoDateConverter.class)
     public Date orderDate;
 
     //total price

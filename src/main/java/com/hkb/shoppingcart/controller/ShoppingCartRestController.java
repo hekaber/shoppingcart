@@ -33,7 +33,7 @@ public class ShoppingCartRestController {
         return this.shoppingCartRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/user/{userName}")
     List<ShoppingCart> getShoppingCartsByUserName(@PathVariable String userName) {
         logger.info("---Getting all products for user '"+ userName +"'---");
         return this.shoppingCartRepository.findByUserName(userName);
