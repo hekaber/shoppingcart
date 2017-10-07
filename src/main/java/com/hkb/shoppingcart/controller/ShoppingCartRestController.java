@@ -132,6 +132,7 @@ public class ShoppingCartRestController {
             throw new ProductNotFoundException(productId);
         }
 
+        // TODO throw exception when product not found in the current cart object
         cart.removeProductQuantity(productId);
 
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
