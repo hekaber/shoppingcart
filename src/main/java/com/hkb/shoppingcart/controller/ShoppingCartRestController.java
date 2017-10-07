@@ -7,6 +7,7 @@ import com.hkb.shoppingcart.model.Product;
 import com.hkb.shoppingcart.model.ShoppingCart;
 import com.hkb.shoppingcart.repo.ProductRepository;
 import com.hkb.shoppingcart.repo.ShoppingCartRepository;
+import com.hkb.shoppingcart.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class ShoppingCartRestController {
     ResponseEntity<?> add(@RequestBody ShoppingCart input, UriComponentsBuilder ucBuilder){
         ShoppingCart result = this.shoppingCartRepository.save(
                 new ShoppingCart(
-                    input.status,
+                    ShoppingCart.PENDING,
                     input.userName,
                     input.products,
                     input.productQuantities,
@@ -95,7 +96,7 @@ public class ShoppingCartRestController {
         logger.info("---Adding product'" + productId +"' to shopping cart '" + cartId +"'---");
         ShoppingCart cart = this.shoppingCartRepository.findOne(cartId);
 
-        if(cartId == null){
+        if(cart == null){
             logger.error("---Unable to update shopping cart'" + cartId +"' not found---");
             throw new ShoppingCartNotFoundException(cartId);
         }
@@ -109,7 +110,8 @@ public class ShoppingCartRestController {
 
         cart.addProduct(product);
         cart.addProductQuantity(product);
-
+        cart.totalPrice += product.price;
+        Utils.round(cart.totalPrice, 2);
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
 
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
@@ -120,7 +122,7 @@ public class ShoppingCartRestController {
         logger.info("---Removing product'" + productId +"' from shopping cart '" + cartId +"'---");
         ShoppingCart cart = this.shoppingCartRepository.findOne(cartId);
 
-        if(cartId == null){
+        if(cart == null){
             logger.error("---Unable to update shopping cart'" + cartId +"' not found---");
             throw new ShoppingCartNotFoundException(cartId);
         }
@@ -134,7 +136,8 @@ public class ShoppingCartRestController {
 
         // TODO throw exception when product not found in the current cart object
         cart.removeProductQuantity(productId);
-
+        cart.totalPrice -= product.price;
+        Utils.round(cart.totalPrice, 2);
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
     }
@@ -144,12 +147,26 @@ public class ShoppingCartRestController {
         logger.info("---Updating shopping cart '" + cartId +"'---");
         ShoppingCart cart = this.shoppingCartRepository.findOne(cartId);
 
-        if(cartId == null){
+        if(cart == null){
             logger.error("---Unable to update shopping cart'" + cartId +"' not found---");
             throw new ShoppingCartNotFoundException(cartId);
         }
 
         ShoppingCart updated = this.shoppingCartRepository.save(input);
+        return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/order/{cartId}")
+    ResponseEntity<?> order(@RequestBody ShoppingCart input, @PathVariable String cartId){
+        logger.info("---Placing order on shopping cart '" + cartId +"'---");
+        ShoppingCart cart = this.shoppingCartRepository.findOne(cartId);
+        if(cart == null){
+            logger.error("---Unable to place order on shopping cart'" + cartId +"' not found---");
+            throw new ShoppingCartNotFoundException(cartId);
+        }
+        //we only get the status and total price info from the input
+        cart.status = ShoppingCart.ORDERED;
+        ShoppingCart updated = this.shoppingCartRepository.save(cart);
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
     }
 

@@ -10,6 +10,9 @@ import java.util.HashMap;
 @Document(collection = "ShoppingCarts")
 public class ShoppingCart {
 
+    public static String ORDERED = "ordered";
+    public static String PENDING = "pending";
+
     @Id
     private String id;
 
