@@ -124,7 +124,8 @@ public class ShoppingCartRestControllerTest {
                         productHashMap,
                         productQuantities,
                         orderDate,
-                        orderDate
+                        orderDate,
+                        0
                 )));
     }
 
@@ -188,7 +189,8 @@ public class ShoppingCartRestControllerTest {
                         productHashMap,
                         productQuantities,
                         date,
-                        date
+                        date,
+                        0
                         ));
 
         this.mockMvc.perform(post("/carts")
