@@ -85,8 +85,8 @@ public class ProductRestControllerTest {
                         prodOneRelease,
                         "dentifrice",
                         4.5f,
-                        "http://colgate.com/2/"
-
+                        "http://colgate.com/2/",
+                        250
                         )));
 
         prodTwoRelease = new Date(1486312050000L);
@@ -98,8 +98,8 @@ public class ProductRestControllerTest {
                         prodTwoRelease,
                         "mousse a raser",
                         4.2f,
-                        "http://gilette.com/2/"
-
+                        "http://gilette.com/2/",
+                        1000
                 )));
     }
 
@@ -126,7 +126,8 @@ public class ProductRestControllerTest {
                         prodRelease,
                         "sechoir a cheveux",
                         3.0f,
-                        "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+                        "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
+                        600
                         ));
 
         this.mockMvc.perform(post("/products")

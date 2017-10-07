@@ -72,7 +72,8 @@ public class ShoppingcartApplication {
 									ft.parse("2017-03-19T15:15:55.570Z"),
 									"Leaf rake with 48-inch wooden handle.",
 									3.2f,
-									"http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+									"http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
+									400
 							));
 					productRepository.save(
 							new Product(
@@ -82,7 +83,8 @@ public class ShoppingcartApplication {
 									ft.parse("2017-03-18T08:15:55.570Z"),
 									"15 gallon capacity rolling garden cart",
 									4.2f,
-									"http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+									"http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png",
+									200
 							));
 					productRepository.save(
 							new Product(
@@ -92,7 +94,8 @@ public class ShoppingcartApplication {
 									ft.parse("2017-05-21T12:15:55.570Z"),
 									"Curved claw steel hammer",
 									4.8f,
-									"http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+									"http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png",
+									400
 							));
 					productRepository.save(
 							new Product(
@@ -102,7 +105,8 @@ public class ShoppingcartApplication {
 									ft.parse("2017-05-15T12:15:55.570Z"),
 									"15-inch steel blade hand saw",
 									3.7f,
-									"http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png"
+									"http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png",
+									1200
 							));
 					productRepository.save(
 							new Product(
@@ -112,7 +116,8 @@ public class ShoppingcartApplication {
 									ft.parse("2017-10-15T14:15:55.570Z"),
 									"15-inch steel blade hand saw",
 									4.6f,
-									"http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
+									"http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png",
+									300
 							));
 					// fetch all users
 					System.out.println("Users found with findAll():");

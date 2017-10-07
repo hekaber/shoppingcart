@@ -89,8 +89,8 @@ public class ShoppingCartRestControllerTest {
                         prodOneRelease,
                         "dentifrice",
                         4.5f,
-                        "http://colgate.com/2/"
-
+                        "http://colgate.com/2/",
+                        250
                 ));
 
         prodTwoRelease = this.ft.parse("2017-02-04T17:15:55.570Z");
@@ -102,8 +102,8 @@ public class ShoppingCartRestControllerTest {
                         prodTwoRelease,
                         "mousse a raser",
                         4.2f,
-                        "http://gilette.com/2/"
-
+                        "http://gilette.com/2/",
+                        1000
                 ));
 
         productList = productRepository.findAll();
@@ -158,7 +158,8 @@ public class ShoppingCartRestControllerTest {
                 date,
                 "sechoir a cheveux",
                 3.0f,
-                "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+                "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
+                250
         ));
 
         this.productRepository.save(new Product(
@@ -168,7 +169,8 @@ public class ShoppingCartRestControllerTest {
                 date,
                 "sechoir a cheveux2",
                 3.0f,
-                "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+                "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
+                250
         ));
 
         List<Product> prodTest = this.productRepository.findByProductCode("GE-test");

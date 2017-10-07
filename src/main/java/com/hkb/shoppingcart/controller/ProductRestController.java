@@ -54,7 +54,8 @@ public class ProductRestController {
                         input.releaseDate,
                         input.description,
                         input.starRating,
-                        input.imageUrl
+                        input.imageUrl,
+                        input.getStock()
                 ));
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/products/{id}").buildAndExpand(result.getId()).toUri());

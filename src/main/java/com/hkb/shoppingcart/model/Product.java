@@ -36,11 +36,12 @@ public class Product {
     public float price = 0;
     public float starRating = 0;
     public String imageUrl;
+    private int stock = 1000;
 
     public Product(){ }
 
     public Product(String productName, String productCode, float price,
-                   Date releaseDate, String description, float starRating, String imageUrl){
+                   Date releaseDate, String description, float starRating, String imageUrl, int stock){
         this.productName = productName;
         this.productCode = productCode;
         this.price = price;
@@ -49,9 +50,14 @@ public class Product {
         this.description = description;
         this.starRating = starRating;
         this.imageUrl = imageUrl;
+        this.stock = stock;
     }
 
     public String getId(){
         return this.id;
     }
+
+    public int getStock() { return this.stock; }
+
+    public void setStock(int value) { this.stock = value; }
 }
