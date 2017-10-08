@@ -60,4 +60,32 @@ public class Product {
     public int getStock() { return this.stock; }
 
     public void setStock(int value) { this.stock = value; }
+
+    public boolean removeStock(){
+        if(this.stock > 0){
+            this.stock--;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean removeStock(int value){
+        if(this.stock > 0){
+            this.stock -= value;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void addStock(){
+        this.stock++;
+    }
+
+    public void addStock(int value){
+        this.stock += value;
+    }
 }

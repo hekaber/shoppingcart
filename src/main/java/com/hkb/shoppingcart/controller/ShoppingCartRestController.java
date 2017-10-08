@@ -1,6 +1,7 @@
 package com.hkb.shoppingcart.controller;
 
 import com.hkb.shoppingcart.exceptions.ProductNotFoundException;
+import com.hkb.shoppingcart.exceptions.ProductStockException;
 import com.hkb.shoppingcart.exceptions.ShoppingCartListNotFoundException;
 import com.hkb.shoppingcart.exceptions.ShoppingCartNotFoundException;
 import com.hkb.shoppingcart.model.Product;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/carts")
@@ -112,7 +114,12 @@ public class ShoppingCartRestController {
         cart.addProductQuantity(product);
         cart.totalPrice += product.price;
         Utils.round(cart.totalPrice, 2);
+
+        //update product stock
+        if(!product.removeStock()) throw new ProductStockException(cartId, productId);
+
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
+        this.productRepository.save(product);
 
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
     }
@@ -138,7 +145,12 @@ public class ShoppingCartRestController {
         cart.removeProductQuantity(productId);
         cart.totalPrice -= product.price;
         Utils.round(cart.totalPrice, 2);
+
+        product.addStock();
+
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
+        this.productRepository.save(product);
+        
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
     }
 
@@ -175,14 +187,24 @@ public class ShoppingCartRestController {
         logger.info("---Deleting shopping cart '" + cartId +"'---");
         ShoppingCart cart = this.shoppingCartRepository.findOne(cartId);
 
-        if(cart != null){
-            this.shoppingCartRepository.delete(cartId);
-            return new ResponseEntity<ShoppingCart>(HttpStatus.NO_CONTENT);
-        }
-        else {
+        if(cart == null){
             logger.error("---Unable to delete shopping cart '" + cartId +"' not found---");
             throw new ShoppingCartNotFoundException(cartId);
         }
+
+        if(!cart.productQuantities.isEmpty()){
+            for(Map.Entry<String, Integer> entry: cart.productQuantities.entrySet()){
+                Product product = this.productRepository.findOne(entry.getKey());
+                if(product != null){
+                    product.addStock(entry.getValue());
+                    this.productRepository.save(product);
+                }
+            }
+        }
+
+        this.shoppingCartRepository.delete(cartId);
+        return new ResponseEntity<ShoppingCart>(HttpStatus.NO_CONTENT);
+
     }
 
 
