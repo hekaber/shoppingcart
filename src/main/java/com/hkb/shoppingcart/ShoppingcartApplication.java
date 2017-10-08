@@ -7,6 +7,7 @@ import com.hkb.shoppingcart.model.CartUser;
 import com.hkb.shoppingcart.model.Product;
 import com.hkb.shoppingcart.repo.CartUserRepository;
 import com.hkb.shoppingcart.repo.ProductRepository;
+import com.hkb.shoppingcart.repo.ShoppingCartRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ShoppingcartApplication {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private ShoppingCartRepository shoppingCartRepository;
 
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartApplication.class);
 
@@ -54,8 +58,9 @@ public class ShoppingcartApplication {
 
 					cartUserRepository.deleteAll();
 					productRepository.deleteAll();
+					shoppingCartRepository.deleteAll();
 
-					// save a couple of users
+					// save some users
 					cartUserRepository.save(new CartUser("Alice", "Smith", "alice", bCryptPasswordEncoder.encode("toto"), "alice@gmail.com"));
 					cartUserRepository.save(new CartUser("Bob", "Smith", "bob", bCryptPasswordEncoder.encode("toto"), "bob@gmail.com"));
 					cartUserRepository.save(new CartUser("toto", "toto", "toto", bCryptPasswordEncoder.encode("toto"), "toto@gmail.com"));
