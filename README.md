@@ -39,7 +39,13 @@ The shopping cart uses the following technologies to work:
 
 ShoppingCart requires Java 1.8 to run and is built with gradle 3.5.
 
-Install the dependencies and devDependencies and start the server.
+Make sure you have a mongo database server up and running on the default port, if not 
+
+```
+$ sudo apt-get install mongodb-org
+```
+
+Build with gradle and start the server.
 
 ```sh
 $ cd shoppingcart
