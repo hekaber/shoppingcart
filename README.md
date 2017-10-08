@@ -44,13 +44,15 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 $ cd shoppingcart
 $ ./gradlew build
-$ java -jar build/libs/shoppingcart-0.0.1-SNAPSHOT.jar
+$ ./gradlew bootRun
 ```
 
 Or
 
 ```sh
-$ ./gradlew bootRun
+$ cd shoppingcart
+$ ./gradlew build
+$ java -jar build/libs/shoppingcart-0.0.1-SNAPSHOT.jar
 ```
 
 ## REST API
