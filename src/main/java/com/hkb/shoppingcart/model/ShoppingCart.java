@@ -1,6 +1,7 @@
 package com.hkb.shoppingcart.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.hkb.shoppingcart.utils.Utils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -68,14 +69,17 @@ public class ShoppingCart {
     }
 
     public void addProductQuantity(Product product){
-        if(this.productQuantities.containsKey(product.getId())){
-            int quantity = this.productQuantities.get(product.getId());
+        String productId = product.getId();
+        if(this.productQuantities.containsKey(productId)){
+            int quantity = this.productQuantities.get(productId);
             quantity++;
-            this.productQuantities.put(product.getId(), quantity);
+            this.productQuantities.put(productId, quantity);
+            this.totalPrice += product.price;
+            Utils.round(this.totalPrice, 2);
         }
         else {
             // init the product quantities if key not found
-            this.productQuantities.put(product.getId(), 1);
+            this.productQuantities.put(productId, 1);
         }
     }
 
@@ -85,8 +89,9 @@ public class ShoppingCart {
         }
     }
 
-    public void removeProductQuantity(String productId){
+    public void removeProductQuantity(Product product){
 
+        String productId = product.getId();
         if(this.productQuantities.containsKey(productId)){
             int quantity = this.productQuantities.get(productId);
             quantity--;
@@ -94,6 +99,8 @@ public class ShoppingCart {
             if(quantity <1){
                 this.productQuantities.remove(productId);
                 this.removeProduct(productId);
+                this.totalPrice -= product.price;
+                Utils.round(this.totalPrice, 2);
             }
             else {
                 this.productQuantities.put(productId, quantity);

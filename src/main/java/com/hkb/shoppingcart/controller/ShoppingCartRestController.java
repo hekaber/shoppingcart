@@ -112,8 +112,6 @@ public class ShoppingCartRestController {
 
         cart.addProduct(product);
         cart.addProductQuantity(product);
-        cart.totalPrice += product.price;
-        Utils.round(cart.totalPrice, 2);
 
         //update product stock
         if(!product.removeStock()) throw new ProductStockException(cartId, productId);
@@ -141,9 +139,7 @@ public class ShoppingCartRestController {
             throw new ProductNotFoundException(productId);
         }
 
-        // TODO throw exception when product not found in the current cart object
-        cart.removeProductQuantity(productId);
-        cart.totalPrice -= product.price;
+        cart.removeProductQuantity(product);
         Utils.round(cart.totalPrice, 2);
 
         product.addStock();
