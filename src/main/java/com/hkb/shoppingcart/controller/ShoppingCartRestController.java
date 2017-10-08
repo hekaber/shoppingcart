@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -195,13 +196,15 @@ public class ShoppingCartRestController {
         }
 
         if(!cart.productQuantities.isEmpty()){
+            List<Product> productList = new ArrayList<Product>();
             for(Map.Entry<String, Integer> entry: cart.productQuantities.entrySet()){
                 Product product = this.productRepository.findOne(entry.getKey());
                 if(product != null){
                     product.addStock(entry.getValue());
-                    this.productRepository.save(product);
+                    productList.add(product);
                 }
             }
+            if(!productList.isEmpty()) this.productRepository.save(productList);
         }
 
         this.shoppingCartRepository.delete(cartId);
