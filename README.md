@@ -16,7 +16,7 @@ The shopping cart uses the following technologies to work:
 * SpringBoot framework
 
 ### Remarks
- * For the moment, the project uses only the test database set by the MongoRepository.
+ * For the moment, the project uses only the default test database from the MongoRepository.
  * All the repositories are flushed on application start, this is done in the ShoppingcartApplication class, comment this:
  					cartUserRepository.deleteAll();
  					productRepository.deleteAll();
@@ -43,6 +43,7 @@ Make sure you have a mongo database server up and running on the default port, i
 
 ```
 $ sudo apt-get install mongodb-org
+$ sudo service mongod start
 ```
 
 Build with gradle and start the server.
