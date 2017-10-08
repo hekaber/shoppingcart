@@ -24,7 +24,7 @@ The shopping cart uses the following technologies to work:
  					at the lines 59 to 61.
  * Default users are set in the db on application start, uname: alice, psw: toto, uname: toto, psw: toto
  * Default products are also set in the db on application start.
- * There is no possibility to add a product (you can update them with a form) on the UI side but this backend provides an
+ * There is no possibility to add nor delete a product (you can update them with a form) on the UI side but this backend provides an
  endpoint for this (could be used by an admin user for instance).
 
 ### Dependencies
