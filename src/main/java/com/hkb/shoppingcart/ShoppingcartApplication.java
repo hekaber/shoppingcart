@@ -73,7 +73,7 @@ public class ShoppingcartApplication {
 							new Product(
 									"Leaf Rake",
 									"GDN-0011",
-									19.95f,
+									1995,
 									ft.parse("2017-03-19T15:15:55.570Z"),
 									"Leaf rake with 48-inch wooden handle.",
 									3.2f,
@@ -84,7 +84,7 @@ public class ShoppingcartApplication {
 							new Product(
 									"Garden Cart",
 									"GDN-0023",
-									32.95f,
+									3295,
 									ft.parse("2017-03-18T08:15:55.570Z"),
 									"15 gallon capacity rolling garden cart",
 									4.2f,
@@ -95,7 +95,7 @@ public class ShoppingcartApplication {
 							new Product(
 									"Hammer",
 									"TBX-0048",
-									8.9f,
+									890,
 									ft.parse("2017-05-21T12:15:55.570Z"),
 									"Curved claw steel hammer",
 									4.8f,
@@ -106,7 +106,7 @@ public class ShoppingcartApplication {
 							new Product(
 									"Saw",
 									"TBX-0022",
-									11.55f,
+									1155,
 									ft.parse("2017-05-15T12:15:55.570Z"),
 									"15-inch steel blade hand saw",
 									3.7f,
@@ -117,7 +117,7 @@ public class ShoppingcartApplication {
 							new Product(
 									"Video Game Controller",
 									"GMG-0042",
-									35.95f,
+									3595,
 									ft.parse("2017-10-15T14:15:55.570Z"),
 									"15-inch steel blade hand saw",
 									4.6f,

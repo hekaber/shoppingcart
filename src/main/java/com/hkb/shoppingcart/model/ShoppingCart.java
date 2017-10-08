@@ -32,14 +32,14 @@ public class ShoppingCart {
     public Date orderDate;
 
     //total price
-    public float totalPrice = 0;
+    public int totalPrice = 0;
 
     public ShoppingCart(){}
 
     public ShoppingCart(String status, String userName,
                         HashMap<String, Product> products,
                         HashMap<String, Integer> productQuantities,
-                        Date orderDate, Date lastModified, float totalPrice){
+                        Date orderDate, Date lastModified, int totalPrice){
         this.status = status;
         this.userName = userName;
         this.products = products;
@@ -74,13 +74,12 @@ public class ShoppingCart {
             int quantity = this.productQuantities.get(productId);
             quantity++;
             this.productQuantities.put(productId, quantity);
-            this.totalPrice += product.price;
-            Utils.round(this.totalPrice, 2);
         }
         else {
             // init the product quantities if key not found
             this.productQuantities.put(productId, 1);
         }
+        this.totalPrice += product.price;
     }
 
     public void removeProduct(String productId){
@@ -99,12 +98,11 @@ public class ShoppingCart {
             if(quantity <1){
                 this.productQuantities.remove(productId);
                 this.removeProduct(productId);
-                this.totalPrice -= product.price;
-                Utils.round(this.totalPrice, 2);
             }
             else {
                 this.productQuantities.put(productId, quantity);
             }
+            this.totalPrice -= product.price;
         }
     }
 }

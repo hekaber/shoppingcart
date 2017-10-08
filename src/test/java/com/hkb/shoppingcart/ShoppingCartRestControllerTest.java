@@ -85,7 +85,7 @@ public class ShoppingCartRestControllerTest {
                 new Product(
                         "colgate white",
                         "GE-1206",
-                        3.95f,
+                        395,
                         prodOneRelease,
                         "dentifrice",
                         4.5f,
@@ -98,7 +98,7 @@ public class ShoppingCartRestControllerTest {
                 new Product(
                         "gilette mousse",
                         "GE-1206",
-                        2.95f,
+                        295,
                         prodTwoRelease,
                         "mousse a raser",
                         4.2f,
@@ -154,7 +154,7 @@ public class ShoppingCartRestControllerTest {
         this.productRepository.save(new Product(
                 "sechoir",
                 "GE-test",
-                19.95f,
+                1995,
                 date,
                 "sechoir a cheveux",
                 3.0f,
@@ -165,7 +165,7 @@ public class ShoppingCartRestControllerTest {
         this.productRepository.save(new Product(
                 "sechoir2",
                 "GE-test",
-                19.95f,
+                1995,
                 date,
                 "sechoir a cheveux2",
                 3.0f,
