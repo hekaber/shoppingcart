@@ -88,4 +88,11 @@ public class Product {
     public void addStock(int value){
         this.stock += value;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Product[id=%s, productName='%s', productCode='%s']",
+                id, productName, productCode);
+    }
 }

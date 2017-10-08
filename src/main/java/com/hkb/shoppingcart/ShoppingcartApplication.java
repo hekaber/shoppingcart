@@ -48,14 +48,15 @@ public class ShoppingcartApplication {
 			return args -> {
 
 					BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-					System.out.println("Let's inspect the beans provided by Spring Boot:");
+//					System.out.println("Let's inspect the beans provided by Spring Boot:");
+//
+//					String[] beanNames = ctx.getBeanDefinitionNames();
+//					Arrays.sort(beanNames);
+//					for (String beanName : beanNames) {
+//							System.out.println(beanName);
+//					}
 
-					String[] beanNames = ctx.getBeanDefinitionNames();
-					Arrays.sort(beanNames);
-					for (String beanName : beanNames) {
-							System.out.println(beanName);
-					}
-
+					logger.info("---Cleaning and reinitializing the database.---");
 					cartUserRepository.deleteAll();
 					productRepository.deleteAll();
 					shoppingCartRepository.deleteAll();
@@ -125,6 +126,7 @@ public class ShoppingcartApplication {
 									300
 							));
 					// fetch all users
+					System.out.println();
 					System.out.println("Users found with findAll():");
 					System.out.println("-------------------------------");
 					for (CartUser cartUser : cartUserRepository.findAll()) {
@@ -132,16 +134,12 @@ public class ShoppingcartApplication {
 					}
 					System.out.println();
 
-					// fetch an individual user
-					System.out.println("CartUser found with findByFirstName('Alice'):");
-					System.out.println("--------------------------------");
-					System.out.println(cartUserRepository.findByFirstName("Alice"));
-
-					System.out.println("Users found with findByLastName('Smith'):");
-					System.out.println("--------------------------------");
-					for (CartUser cartUser : cartUserRepository.findByLastName("Smith")) {
-						System.out.println(cartUser);
+					System.out.println("Products found with findAll():");
+					System.out.println("-------------------------------");
+					for (Product product: productRepository.findAll()) {
+						System.out.println(product);
 					}
+					System.out.println();
 
 			};
 	}
