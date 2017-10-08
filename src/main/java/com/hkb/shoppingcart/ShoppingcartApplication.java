@@ -89,7 +89,7 @@ public class ShoppingcartApplication {
 									"15 gallon capacity rolling garden cart",
 									4.2f,
 									"http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png",
-									200
+									20
 							));
 					productRepository.save(
 							new Product(

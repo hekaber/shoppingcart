@@ -12,8 +12,20 @@ The shopping cart uses the following technologies to work:
 
 * Java 1.8
 * Built with gradle 3.5
-* MongoDB database with default config.
+* MongoDB database with default config mongodb://127.0.0.1:27017.
 * SpringBoot framework
+
+### Remarks
+ * For the moment, the project uses only the test database set by the MongoRepository.
+ * All the repositories are flushed on application start, this is done in the ShoppingcartApplication class, comment this:
+ 					cartUserRepository.deleteAll();
+ 					productRepository.deleteAll();
+ 					shoppingCartRepository.deleteAll();
+ 					at the lines 59 to 61.
+ * Default users are set in the db on application start, uname: alice, psw: toto, uname: toto, psw: toto
+ * Default products are also set in the db on application start.
+ * There is no possibility to add a product (you can update them with a form) on the UI side but this backend provides an
+ endpoint for this (could be used by an admin user for instance).
 
 ### Dependencies
 
@@ -324,7 +336,8 @@ $ curl -i -H "Content-Type:application/json" -H "Authorization:<token>" -X POST 
 ###### Response
 ###### 200
 new shopping cart payload updated with the new product
-
+###### 202
+shopping cart processed but product not added because of stock too low
 ###### Request
 `DELETE /carts/{cartId}/product/{productId}`
 Removes a product from a shopping cart

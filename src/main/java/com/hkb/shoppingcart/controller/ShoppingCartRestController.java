@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -112,9 +113,11 @@ public class ShoppingCartRestController {
 
         cart.addProduct(product);
         cart.addProductQuantity(product);
-
+        cart.lastModified = new Date();
         //update product stock
-        if(!product.removeStock()) throw new ProductStockException(cartId, productId);
+        if(!product.removeStock()){
+            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.ACCEPTED);
+        }
 
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
         this.productRepository.save(product);
@@ -140,7 +143,7 @@ public class ShoppingCartRestController {
         }
 
         cart.removeProductQuantity(product);
-        Utils.round(cart.totalPrice, 2);
+        cart.lastModified = new Date();
 
         product.addStock();
 
@@ -174,6 +177,9 @@ public class ShoppingCartRestController {
         }
         //we only get the status and total price info from the input
         cart.status = ShoppingCart.ORDERED;
+        cart.lastModified = new Date();
+        cart.orderDate = new Date();
+
         ShoppingCart updated = this.shoppingCartRepository.save(cart);
         return new ResponseEntity<ShoppingCart>(updated, HttpStatus.OK);
     }
