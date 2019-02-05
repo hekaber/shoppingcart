@@ -1,39 +1,27 @@
-buildscript {
-	ext {
-		springBootVersion = '1.5.7.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'org.springframework.boot' version '1.5.19.RELEASE' //DO NOT UPGRADE 2.X.X AS MONGODB IS NOT WORKING HAS SOME ISSUE WITH org.springframework.data.repository.CrudRepository
+	id 'io.spring.dependency-management' version '1.0.6.RELEASE'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+repositories {
+	mavenCentral()
+}
 
 group = 'com.hkb'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-repositories {
-	mavenCentral()
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
-}
-
-dependencies {
-    compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
-}
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter")
-	compile("org.springframework.boot:spring-boot-starter-web:1.5.7.RELEASE")
-	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
-    compile("org.springframework.boot:spring-boot-starter-security")
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
+	compile("org.springframework.boot:spring-boot-starter-security")
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile("io.jsonwebtoken:jjwt:0.7.0")
+	compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
