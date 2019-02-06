@@ -3,6 +3,7 @@ package com.hkb.shoppingcart.controller;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class BasicController {
 
     @GetMapping("/")
-    String sayHello() {
+    String sayHello(Model model) {
+
+        model.addAttribute("mainScript", "/static/hello.js");
+
         return "page";
     }
 

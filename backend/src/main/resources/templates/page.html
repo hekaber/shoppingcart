@@ -2,7 +2,18 @@
 <html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <script src="/static/hello.js"></script>
+    <script th:inline="javascript">
+        var mainScriptSource = /*[[${mainScript}]]*/ '';
+
+        var injectScript = function (scriptSource) {
+            var script = document.createElement('script');
+            script.src = scriptSource;
+            document.head.appendChild(script);
+        };
+
+        injectScript(mainScriptSource);
+
+    </script>
     <title>HTTP Error</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1" />
