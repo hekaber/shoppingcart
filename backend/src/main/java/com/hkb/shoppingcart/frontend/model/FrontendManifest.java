@@ -7,4 +7,7 @@ import lombok.Value;
 public class FrontendManifest {
     @JsonProperty("main.js")
     String mainScriptName;
+
+    @JsonProperty("styles/main.scss")
+    String stylesheetName;
 }

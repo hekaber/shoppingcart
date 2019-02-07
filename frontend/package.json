@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --colors --verbose",
     "build": "webpack",
-    "dev": "webpack --mode=development --watch"
+    "dev": "webpack --mode=development --watch",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -37,12 +38,16 @@
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
+    "extract-loader": "^3.1.0",
+    "file-loader": "^3.0.1",
     "jest": "^24.1.0",
+    "node-sass": "^4.11.0",
     "react-router": "^4.3.1",
-    "react-test-renderer": "^16.8.1",
+    "sass-loader": "^7.1.0",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3",
     "webpack-manifest-plugin": "^2.0.4"

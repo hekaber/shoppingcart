@@ -15,4 +15,7 @@ public class FrontendSourcesProvider {
         return URL_PREFIX + manifest.getMainScriptName();
     }
 
+    public String getStylesheet() {
+        return URL_PREFIX + manifest.getStylesheetName();
+    }
 }

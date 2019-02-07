@@ -20,6 +20,8 @@ public class BasicController {
 
     @GetMapping("/login")
     String serveLoginPage(Model model) {
+
+        model.addAttribute("stylesheet", frontendSourcesProvider.getStylesheet());
         model.addAttribute("mainScript", frontendSourcesProvider.getMainScript());
 
         return "page";
