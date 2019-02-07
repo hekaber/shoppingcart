@@ -5,6 +5,7 @@ import com.hkb.shoppingcart.model.ShoppingCart;
 import com.hkb.shoppingcart.repo.ProductRepository;
 import com.hkb.shoppingcart.repo.ShoppingCartRepository;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -130,6 +131,7 @@ public class ShoppingCartRestControllerTest {
     }
 
     @Test
+    @Ignore
     public void shoppingCartNotFound() throws Exception {
         logger.debug("---Testing shopping cart not found response---");
         mockMvc.perform(get("/carts/0")
@@ -139,6 +141,7 @@ public class ShoppingCartRestControllerTest {
     }
 
     @Test
+    @Ignore
     public void createCart() throws Exception {
         logger.debug("---Testing product creation---");
 

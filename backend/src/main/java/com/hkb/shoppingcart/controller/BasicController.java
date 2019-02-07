@@ -1,5 +1,7 @@
 package com.hkb.shoppingcart.controller;
 
+import com.hkb.shoppingcart.frontend.FrontendSourcesProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,17 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping
 @Controller
+@RequiredArgsConstructor
 public class BasicController {
 
-    @GetMapping("/")
-    String sayHello(Model model) {
+    private final FrontendSourcesProvider frontendSourcesProvider;
 
-        model.addAttribute("mainScript", "/static/hello.js");
+    @GetMapping("/login")
+    String serveLoginPage(Model model) {
+        model.addAttribute("mainScript", frontendSourcesProvider.getMainScript());
 
         return "page";
     }
 
-    @GetMapping(value="/index")
+    @GetMapping("/index")
     public void method(HttpServletResponse response){
         response.setHeader(HttpHeaders.LOCATION, "/");
         response.setStatus(HttpStatus.FOUND.value());

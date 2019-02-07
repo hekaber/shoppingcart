@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -33,9 +34,27 @@ public class ShoppingcartApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartApplication.class);
 
+	private static final String ENV_VAR_NAME = "ENVIRONMENT";
+	private static final String DEFAULT_PROFILE = "dev";
+
 	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(ShoppingcartApplication.class, args);
-		logger.info("---Shopping cart application started---");
+		final ConfigurableApplicationContext context =
+			new SpringApplicationBuilder(ShoppingcartApplication.class)
+				.profiles(environmentProfile())
+				.run(args);
+
+		logger.info("Active profiles: {}",
+			String.join(", ", context.getEnvironment().getActiveProfiles()));
+		logger.info("Account access service running on http://localhost:{}",
+			context.getEnvironment().getProperty("local.server.port"));
+	}
+
+	private static String environmentProfile() {
+		final String envProfile = System.getenv(ENV_VAR_NAME);
+		if (envProfile != null) {
+			return envProfile;
+		}
+		return DEFAULT_PROFILE;
 	}
 
 	@Bean

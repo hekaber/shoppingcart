@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8" />
-    <script th:inline="javascript">
-        var mainScriptSource = /*[[${mainScript}]]*/ '';
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8"/>
+        <script th:inline="javascript">
+            var mainScriptSource = /*[[${mainScript}]]*/ '';
 
-        var injectScript = function (scriptSource) {
-            var script = document.createElement('script');
-            script.src = scriptSource;
-            document.head.appendChild(script);
-        };
+            var injectScript = function (scriptSource) {
+                var script = document.createElement('script');
+                script.src = scriptSource;
+                document.head.appendChild(script);
+            };
 
-        injectScript(mainScriptSource);
+            injectScript(mainScriptSource);
 
-    </script>
-    <title>HTTP Error</title>
+        </script>
+        <title>Shopping Cart</title>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-</head>
-<body>
-
-<h1>Hello World</h1>
-
-<p>Project started</p>
-
-</body>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    </head>
+    <body>
+        <div id="page" class="main-container"></div>
+    </body>
 </html>

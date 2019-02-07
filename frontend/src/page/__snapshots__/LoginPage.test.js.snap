@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page snapshot testing 1`] = `
+<div
+  className="login-container"
+>
+  <Input
+    name="username"
+    placeholder="example@example.com hello    s"
+    type="username"
+  />
+</div>
+`;

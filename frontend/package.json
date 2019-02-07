@@ -1,0 +1,50 @@
+{
+  "name": "shopping_cart",
+  "version": "1.0.0",
+  "description": "This is a simple backend implemented using the spring boot framework and hosting a REST API for web clients.",
+  "scripts": {
+    "test": "jest --colors --verbose",
+    "build": "webpack",
+    "dev": "webpack --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankita15/shopping-cart.git"
+  },
+  "author": "Ankita Srivastava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sankita15/shopping-cart/issues"
+  },
+  "homepage": "https://github.com/sankita15/shopping-cart#readme",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "prop-types": "latest",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.3.1",
+    "reactstrap": "^7.1.0",
+    "yarn": "^1.13.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.1.0",
+    "react-router": "^4.3.1",
+    "react-test-renderer": "^16.8.1",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-manifest-plugin": "^2.0.4"
+  }
+}

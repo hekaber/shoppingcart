@@ -1,29 +1,17 @@
-.gradle
-/build/
-/out/
-!gradle/wrapper/gradle-wrapper.jar
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+.idea/
 *.iml
 *.ipr
+*.iws
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+.DS_Store
 
-## Project references ##
-references.txt
+/backend/.gradle/
+/backend/build/
+/backend/out/
+/backend/bin/**
+/backend/.classpath
+/backend/.project
+/backend/.settings/**
+
+/frontend/dist/
+/frontend/node_modules/
