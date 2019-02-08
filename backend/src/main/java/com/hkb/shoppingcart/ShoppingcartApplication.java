@@ -45,7 +45,7 @@ public class ShoppingcartApplication {
 
 		logger.info("Active profiles: {}",
 			String.join(", ", context.getEnvironment().getActiveProfiles()));
-		logger.info("Account access service running on http://localhost:{}",
+		logger.info("Shopping Cart service running on http://localhost:{}",
 			context.getEnvironment().getProperty("local.server.port"));
 	}
 

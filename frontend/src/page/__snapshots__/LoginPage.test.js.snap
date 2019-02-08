@@ -2,12 +2,117 @@
 
 exports[`Login Page snapshot testing 1`] = `
 <div
-  className="login-container"
+  className="login-form"
 >
-  <Input
-    name="username"
-    placeholder="example@example.com hello    s"
-    type="username"
-  />
+  <Container
+    tag="div"
+  >
+    <Form
+      tag="form"
+    >
+      <Col
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <FormGroup
+          tag="div"
+        >
+          <h2>
+            Login Form
+          </h2>
+          <div
+            className="form-group"
+          >
+            <Label
+              tag="label"
+              widths={
+                Array [
+                  "xs",
+                  "sm",
+                  "md",
+                  "lg",
+                  "xl",
+                ]
+              }
+            >
+              Email
+            </Label>
+            <Input
+              className="login-form__textfield"
+              name="username"
+              onChange={[Function]}
+              placeholder="example@example.com"
+              type="email"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+        </FormGroup>
+      </Col>
+      <Col
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <FormGroup
+          tag="div"
+        >
+          <div
+            className="form-group"
+          >
+            <Label
+              tag="label"
+              widths={
+                Array [
+                  "xs",
+                  "sm",
+                  "md",
+                  "lg",
+                  "xl",
+                ]
+              }
+            >
+              Password
+            </Label>
+            <Input
+              className="login-form__textfield"
+              name="password"
+              onChange={[Function]}
+              placeholder="*******"
+              type="password"
+            />
+          </div>
+        </FormGroup>
+      </Col>
+      <Button
+        className="btn btn-primary"
+        color="secondary"
+        disabled={true}
+        tag="button"
+        type="submit"
+      >
+        Submit
+      </Button>
+    </Form>
+  </Container>
 </div>
 `;

@@ -1,0 +1,18 @@
+.login-form{
+
+  width: 40%;
+  margin: 10% auto;
+
+  ::placeholder{
+    color: lightgrey;
+  }
+
+  .btn .btn-primary{
+    width: 40%;
+  }
+
+  .btn-secondary{
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+}
