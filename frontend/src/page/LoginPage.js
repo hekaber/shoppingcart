@@ -11,14 +11,14 @@ export default class LoginPage extends React.Component {
         }
     }
 
-    validate(fieldName, fieldValue){
-            this.setState({
-                [fieldName]: fieldValue.length > 0
-            })
+    validate(fieldName, fieldValue) {
+        this.setState({
+            [fieldName]: fieldValue.length > 0
+        })
     }
 
     canSubmit() {
-        const { email, password } = this.state;
+        const {email, password} = this.state;
         return email && password;
     }
 
