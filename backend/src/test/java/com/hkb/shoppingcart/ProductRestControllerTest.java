@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ShoppingcartApplication.class)
+@SpringBootTest(classes = TestConfig.class)
 @WebAppConfiguration
 public class ProductRestControllerTest {
     private static final Logger logger = LoggerFactory.getLogger(ProductRestControllerTest.class);
@@ -105,7 +105,6 @@ public class ProductRestControllerTest {
     }
 
     @Test
-    @Ignore
     public void productNotFound() throws Exception {
         logger.debug("---Testing product not found response---");
         mockMvc.perform(get("/products/0/")
@@ -115,7 +114,6 @@ public class ProductRestControllerTest {
     }
 
     @Test
-    @Ignore
     public void createProduct() throws Exception {
         logger.debug("---Testing product creation---");
 
@@ -138,11 +136,11 @@ public class ProductRestControllerTest {
         .andExpect(status().isCreated());
     }
 
-//    @Test
-//    public void updateProduct() throws Exception {
-//        logger.debug("---Testing product update---");
-//        //will update the product sechoir description
-//    }
+    @Test
+    public void updateProduct() throws Exception {
+        logger.debug("---Testing product update---");
+        //will update the product sechoir description
+    }
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
