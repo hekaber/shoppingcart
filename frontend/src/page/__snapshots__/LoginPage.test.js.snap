@@ -43,15 +43,21 @@ exports[`Login Page snapshot testing 1`] = `
                 ]
               }
             >
-              Email
+              Username
             </Label>
             <Input
               className="login-form__textfield"
+              invalid={false}
               name="username"
               onChange={[Function]}
-              placeholder="example@example.com"
-              type="email"
+              placeholder="Username"
+              type="username"
             />
+            <FormFeedback
+              tag="div"
+            >
+              Snap! your username is not valid
+            </FormFeedback>
             <small
               className="form-text text-muted"
               id="emailHelp"
@@ -95,11 +101,17 @@ exports[`Login Page snapshot testing 1`] = `
             </Label>
             <Input
               className="login-form__textfield"
+              invalid={false}
               name="password"
               onChange={[Function]}
               placeholder="*******"
               type="password"
             />
+            <FormFeedback
+              tag="div"
+            >
+              Password must be more than 4 characters & less than 8 characters
+            </FormFeedback>
           </div>
         </FormGroup>
       </Col>

@@ -14,16 +14,15 @@ export default class LoginPage extends React.Component {
     validate(fieldName, fieldValue) {
         const usernameRex = /^[a-zA-Z0-9]{3,10}$/;
         const passwordRex = /^[a-zA-Z0-9!@#$%^&*]{4,8}$/;
-        const regex = fieldName === 'email' ? usernameRex : passwordRex;
-            fieldValue.length > 0 && this.handleFieldChange(fieldName,fieldValue,regex);
+        const regex = fieldName === 'username' ? usernameRex : passwordRex;
+        fieldValue.length > 0 && this.handleFieldChange(fieldName, fieldValue, regex);
     }
 
-    handleFieldChange(fieldName,fieldValue,regex){
-       this.setState({
-           [fieldName]: regex.test(fieldValue)
-       })
+    handleFieldChange(fieldName, fieldValue, regex) {
+        this.setState({
+            [fieldName]: regex.test(fieldValue)
+        })
     }
-
 
     canSubmit() {
         const {username, password} = this.state;
@@ -44,8 +43,8 @@ export default class LoginPage extends React.Component {
                                            name="username"
                                            className="login-form__textfield"
                                            placeholder="Username"
-                                           onBlur={(e) => this.validate('username', e.target.value)}
-                                           invalid={!this.state.username && this.state.username!==''}
+                                           onChange={(e) => this.validate('username', e.target.value)}
+                                           invalid={!this.state.username && this.state.username !== ''}
                                     />
                                     <FormFeedback>Snap! your username is not valid</FormFeedback>
                                     <small id="emailHelp" className="form-text text-muted">We'll never share your email
@@ -62,10 +61,11 @@ export default class LoginPage extends React.Component {
                                            name="password"
                                            className="login-form__textfield"
                                            placeholder="*******"
-                                           onBlur={(e) => this.validate('password', e.target.value)}
-                                           invalid={!this.state.password && this.state.password!==''}
+                                           onChange={(e) => this.validate('password', e.target.value)}
+                                           invalid={!this.state.password && this.state.password !== ''}
                                     />
-                                    <FormFeedback>Password must be more than 4 characters & less than 8 characters</FormFeedback>
+                                    <FormFeedback>Password must be more than 4 characters & less than 8
+                                        characters</FormFeedback>
                                 </div>
                             </FormGroup>
                         </Col>
