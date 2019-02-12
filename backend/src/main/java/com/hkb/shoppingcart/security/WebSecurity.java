@@ -12,7 +12,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Arrays;
 
 import static com.hkb.shoppingcart.security.SecurityConstants.SIGN_UP_URL;
 
@@ -29,14 +28,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/","/index","/login", "/static/**").permitAll()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                .antMatchers(HttpMethod.POST, "/carts").permitAll()
-                .antMatchers(HttpMethod.GET, "/carts").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
+            .antMatchers(HttpMethod.GET, "/", "/index","/login", "/static/**").permitAll()
+            .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+            .antMatchers(HttpMethod.POST, "/carts").permitAll()
+            .antMatchers(HttpMethod.GET, "/carts").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .successForwardUrl("/products")
+            .permitAll()
+            .and()
+            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+            .addFilter(new JWTAuthorizationFilter(authenticationManager()));
     }
 
     @Override
