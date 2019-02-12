@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page snapshot testing 1`] = `
+<div
+  className="login-form"
+>
+  <Container
+    tag="div"
+  >
+    <Form
+      action="/login"
+      onSubmit={[Function]}
+      tag="form"
+    >
+      <Col
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <FormGroup
+          tag="div"
+        >
+          <h2>
+            Login Form
+          </h2>
+          <div
+            className="form-group"
+          >
+            <Label
+              tag="label"
+              widths={
+                Array [
+                  "xs",
+                  "sm",
+                  "md",
+                  "lg",
+                  "xl",
+                ]
+              }
+            >
+              Username
+            </Label>
+            <Input
+              className="login-form__textfield"
+              invalid={false}
+              name="username"
+              onChange={[Function]}
+              placeholder="Username"
+              type="username"
+            />
+            <FormFeedback
+              tag="div"
+            >
+              Snap! your username is not valid
+            </FormFeedback>
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+        </FormGroup>
+      </Col>
+      <Col
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <FormGroup
+          tag="div"
+        >
+          <div
+            className="form-group"
+          >
+            <Label
+              tag="label"
+              widths={
+                Array [
+                  "xs",
+                  "sm",
+                  "md",
+                  "lg",
+                  "xl",
+                ]
+              }
+            >
+              Password
+            </Label>
+            <Input
+              className="login-form__textfield"
+              invalid={false}
+              name="password"
+              onChange={[Function]}
+              placeholder="*******"
+              type="password"
+            />
+            <FormFeedback
+              tag="div"
+            >
+              Password must be more than 4 characters & less than 8 characters
+            </FormFeedback>
+          </div>
+        </FormGroup>
+      </Col>
+      <Button
+        className="btn btn-primary"
+        color="secondary"
+        disabled={true}
+        tag="button"
+        type="submit"
+      >
+        Submit
+      </Button>
+    </Form>
+  </Container>
+</div>
+`;

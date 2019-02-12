@@ -1,0 +1,57 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "plugins": [
+        "react",
+        "jest"
+    ],
+    "env": {
+        "es6": true,
+        "jest": true,
+        "node": true,
+        "browser": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "16.2.0"
+        }
+    },
+    "rules": {
+        "no-console": "warn",
+        "no-trailing-spaces": "warn",
+        "object-curly-spacing": ["warn", "always"],
+        "quotes": ["warn", "single"],
+        "prefer-template": "warn",
+        "semi": "warn",
+        "quote-props": ["warn", "consistent"],
+        "arrow-body-style": "warn",
+        "comma-spacing": "warn",
+        "indent": ["warn", 4],
+        "no-param-reassign": "error",
+        "space-infix-ops": ["warn", { "int32Hint": true }],
+        "max-len": "off",
+        "prefer-promise-reject-errors": "off",
+        "object-curly-newline": ["error", {"consistent": true }],
+        "react/jsx-filename-extension": "off",
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4],
+        "react/forbid-prop-types": ["error", {"forbid": ["any"]}],
+        "react/require-default-props": "off", //TODO: TURN ON THIS RULE
+        "react/sort-comp": "off",
+        "no-underscore-dangle": "off",
+        "consistent-return": "off",
+        "no-plusplus": "off",
+        "import/no-named-as-default": "off"
+    }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8"/>
+        <link th:href="${stylesheet}" rel="stylesheet"/>
+        <script th:inline="javascript">
+            var mainScriptSource = /*[[${mainScript}]]*/ '';
+
+            var injectScript = function (scriptSource) {
+                var script = document.createElement('script');
+                script.src = scriptSource;
+                document.head.appendChild(script);
+            };
+
+            injectScript(mainScriptSource);
+
+        </script>
+        <title>Shopping Cart</title>
+
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    </head>
+    <body>
+        <div id="page" class="main-container"></div>
+    </body>
+</html>
