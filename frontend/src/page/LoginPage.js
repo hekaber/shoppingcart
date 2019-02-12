@@ -5,35 +5,54 @@ export default class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            userName: null,
+            password: null,
         };
     }
 
     validate(fieldName, fieldValue) {
         const usernameRex = /^[a-zA-Z0-9]{3,10}$/;
         const passwordRex = /^[a-zA-Z0-9!@#$%^&*]{4,8}$/;
-        const regex = fieldName === 'username' ? usernameRex : passwordRex;
+        const regex = fieldName === 'userName' ? usernameRex : passwordRex;
         return fieldValue.length > 0 && this.handleFieldChange(fieldName, fieldValue, regex);
     }
 
     handleFieldChange(fieldName, fieldValue, regex) {
+        let result = regex.test(fieldValue)? fieldValue : '';
         this.setState({
-            [fieldName]: regex.test(fieldValue),
+            [fieldName]: result,
         });
     }
 
+    clickSubmit(){
+
+        const { userName,password } = this.state;
+
+        fetch(`/login`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({userName: userName,password: password})
+        }).then(res => (res.ok ? location.href='/products' : Promise.reject(res.status)
+        ))
+    }
+
     canSubmit() {
-        const { username, password } = this.state;
-        return username && password;
+        const { userName, password } = this.state;
+        return userName && password;
+    }
+
+    handleOnSubmit(e) {
+        e.preventDefault();
     }
 
     render() {
-        const { username, password } = this.state;
+        const { userName, password } = this.state;
         return (
             <div className="login-form">
                 <Container>
-                    <Form>
+                    <Form onSubmit={(e) => this.handleOnSubmit(e)} >
                         <Col>
                             <FormGroup>
                                 <h2>Login Form</h2>
@@ -41,11 +60,11 @@ export default class LoginPage extends React.Component {
                                     <Label>Username</Label>
                                     <Input
                                         type="username"
-                                        name="username"
+                                        name="userName"
                                         className="login-form__textfield"
                                         placeholder="Username"
-                                        onChange={e => this.validate('username', e.target.value)}
-                                        invalid={!username && username !== ''}
+                                        onChange={e => this.validate('userName', e.target.value)}
+                                        invalid={!userName && userName !== null}
                                     />
                                     <FormFeedback>Snap! your username is not valid</FormFeedback>
                                     <small id="emailHelp" className="form-text text-muted">
@@ -64,7 +83,7 @@ export default class LoginPage extends React.Component {
                                         className="login-form__textfield"
                                         placeholder="*******"
                                         onChange={e => this.validate('password', e.target.value)}
-                                        invalid={!password && password !== ''}
+                                        invalid={!password && password !== null}
                                     />
                                     <FormFeedback>
 Password must be more than 4 characters & less than 8
@@ -73,7 +92,7 @@ Password must be more than 4 characters & less than 8
                                 </div>
                             </FormGroup>
                         </Col>
-                        <Button type="submit" disabled={!this.canSubmit()} className="btn btn-primary">Submit</Button>
+                        <Button type="submit" disabled={!this.canSubmit()} className="btn btn-primary" onClick={(e) => this.clickSubmit(e)}>Submit</Button>
                     </Form>
                 </Container>
             </div>

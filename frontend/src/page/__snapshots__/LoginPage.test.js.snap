@@ -8,6 +8,8 @@ exports[`Login Page snapshot testing 1`] = `
     tag="div"
   >
     <Form
+      action="/login"
+      onSubmit={[Function]}
       tag="form"
     >
       <Col

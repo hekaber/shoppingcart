@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Input, Button } from 'reactstrap';
+import { Input, Button, Form } from 'reactstrap';
 import LoginPage from './LoginPage';
 
 describe('Login Page', () => {
@@ -97,5 +97,29 @@ describe('Login Page', () => {
 
             expect(loginButton1.prop('disabled')).toBeFalsy();
         });
+
+        it('Login button triggers form submit', async () => {
+            fetch.mockResolvedValueOnce({ json: () => Promise.resolve(), ok: true });
+            const username = component.find(Input).at(0);
+            const password = component.find(Input).at(1);
+            const formComponent = component.find(Form);
+
+            username.props().onChange({target: {value: USERNAME}});
+            password.props().onChange({target: {value: PASSWORD}});
+
+            formComponent.props().onSubmit();
+            // eslint-disable-next-line no-undef
+            await flushPromises();
+
+
+
+            expect(fetch).toHaveBeenCalledWith(`/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({'userName': USERNAME, 'password': PASSWORD})
+            })
+    });
     });
 });
